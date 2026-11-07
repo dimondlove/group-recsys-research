@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run experiment (pilot)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/run_experiment.py",
+      "args": ["configs/pilot.yaml"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "CLI: grouprec example",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "grouprec",
+      "args": ["examples/ratings_example.csv", "--top", "3"]
+    }
+  ]
+}
