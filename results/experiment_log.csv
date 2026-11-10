@@ -1,0 +1,4 @@
+run_id,config_name,seed,test_rmse,seconds,run_dir
+smoke_20261108_034423,smoke,1,0.6651,0.7,results/runs/smoke_20261108_034423
+pilot_20261108_034829,pilot,42,0.8642,5.5,results/runs/pilot_20261108_034829
+main_s42_20261108_040151,main,42,0.8642,10.5,results/runs/main_s42_20261108_040151

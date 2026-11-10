@@ -1,0 +1,22 @@
+# Пилот на MovieLens 1M. Данные: python scripts/download_movielens.py
+name: pilot
+seed: 42
+data:
+  path: data/raw/ml-1m
+  min_user_ratings: 20
+split: {method: random, test_frac: 0.2}
+model: {name: als, n_factors: 32, reg: 0.1, n_iters: 10}
+groups:
+  sizes: [3, 5, 10]
+  kinds: [random, similar, dissimilar]
+  n_groups: 100
+  pool_size: 2000
+  neighborhood: 50
+  min_test_relevant: 3
+  relevance_threshold: 4.0
+aggregation:
+  rules: [average, least_misery, most_pleasure, borda, copeland]
+  k: 10
+  tiebreak: average
+  prefilter_top_n: null        # для 3700 элементов Копленд считается быстро; при больших каталогах задайте, например, 100
+  candidates: unseen_test_union   # основной режим; для проверки устойчивости повторите с: unseen

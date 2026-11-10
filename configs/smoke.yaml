@@ -1,0 +1,19 @@
+# Проверка конвейера на фиктивных данных (быстро, секунды).
+# Данные: python -m grouprec.datasets.fake data/raw/fake-ml --users 400 --items 500
+name: smoke
+seed: 1
+data:
+  path: data/raw/fake-ml
+split: {method: random, test_frac: 0.2}
+model: {name: als, n_factors: 8, reg: 0.1, n_iters: 8}
+groups:
+  sizes: [3, 5]
+  kinds: [random, similar, dissimilar]
+  n_groups: 30
+  pool_size: 400
+  min_test_relevant: 2
+aggregation:
+  rules: [average, least_misery, borda, copeland]
+  k: 10
+  tiebreak: average
+  candidates: unseen

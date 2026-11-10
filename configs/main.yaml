@@ -1,0 +1,28 @@
+# Основной эксперимент. Данные: python scripts/download_movielens.py (или ручная загрузка в data/raw/ml-1m)
+# Отличия от pilot.yaml: больше групп (мощность тестов), диапазон активности участников
+# (убирает смещение: «похожие» и «непохожие» группы иначе набираются из малоактивных пользователей).
+# Запуск: python scripts/run_experiment.py configs/main.yaml
+# Анализ: python scripts/analyze_run.py results/runs/<папка запуска>
+name: main
+seed: 42
+data:
+  path: data/raw/ml-1m
+  min_user_ratings: 20
+split: {method: random, test_frac: 0.2}
+model: {name: als, n_factors: 32, reg: 0.1, n_iters: 10}
+groups:
+  sizes: [3, 5, 10]
+  kinds: [random, similar, dissimilar]
+  n_groups: 500
+  pool_size: 2000
+  neighborhood: 50
+  activity_band: [0.25, 0.75]
+  min_test_relevant: 3
+  relevance_threshold: 4.0
+aggregation:
+  rules: [average, least_misery, most_pleasure, borda, copeland]
+  k: 10
+  tiebreak: average
+  reference_rule: average
+  prefilter_top_n: null
+  candidates: unseen_test_union   # для проверки устойчивости повторите с: unseen
